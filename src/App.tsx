@@ -5,8 +5,6 @@ import Navigation from './components/Navigation'
 import HUD from './components/HUD'
 import Hero from './components/scenes/Hero'
 import Services from './components/scenes/Services'
-import WhyAI from './components/scenes/WhyAI'
-import CaseStudies from './components/scenes/CaseStudies'
 import Contact from './components/scenes/Contact'
 import { NAV_ITEMS, type SceneId } from './types'
 
@@ -39,10 +37,6 @@ function SceneRenderer({
       return <Hero onNavigate={onNavigate} />
     case 'services':
       return <Services />
-    case 'why-ai':
-      return <WhyAI />
-    case 'case-studies':
-      return <CaseStudies />
     case 'contact':
       return <Contact />
   }
@@ -55,7 +49,7 @@ function AppInner() {
     setActiveScene(id)
   }, [])
 
-  /* Keyboard navigation: arrow keys or 1-5 */
+  /* Keyboard navigation: arrow keys or 1-3 */
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const ids = NAV_ITEMS.map((n) => n.id)
@@ -69,7 +63,7 @@ function AppInner() {
         e.preventDefault()
         const prev = ids[(idx - 1 + ids.length) % ids.length]
         setActiveScene(prev)
-      } else if (e.key >= '1' && e.key <= '5') {
+      } else if (e.key >= '1' && e.key <= '3') {
         const target = ids[parseInt(e.key) - 1]
         if (target) setActiveScene(target)
       }

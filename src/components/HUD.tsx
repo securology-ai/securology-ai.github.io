@@ -29,8 +29,6 @@ export default function HUD({ activeScene }: HUDProps) {
   const sceneLabels: Record<SceneId, string> = {
     hero: 'SYS://HOME',
     services: 'SYS://SERVICES',
-    'why-ai': 'SYS://AI-SECURITY',
-    'case-studies': 'SYS://OUTCOMES',
     contact: 'SYS://CONTACT',
   }
 
