@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset & base */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #0a0a0f;
+  color: #e0e0e8;
+}
+
+/* Disable all scrolling */
+html {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+body {
+  overflow: hidden;
+  overscroll-behavior: none;
+  position: fixed;
+  inset: 0;
+}
+
+/* Subtle noise overlay */
+#root::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
+
+/* Glass panel utility */
+@layer components {
+  .glass-panel {
+    background: rgba(26, 26, 46, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(42, 42, 64, 0.5);
+    border-radius: 12px;
+  }
+
+  .glass-panel-strong {
+    background: rgba(26, 26, 46, 0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(42, 42, 64, 0.7);
+    border-radius: 12px;
+  }
+
+  .glow-cyan {
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.15), 0 0 60px rgba(0, 229, 255, 0.05);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(179, 136, 255, 0.15), 0 0 60px rgba(179, 136, 255, 0.05);
+  }
+
+  .text-glow-cyan {
+    text-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+  }
+
+  .border-glow {
+    position: relative;
+  }
+
+  .border-glow::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(0, 229, 255, 0.3), transparent 50%, rgba(179, 136, 255, 0.3));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Animated scan line for HUD feel */
+  .scanline {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scanline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.6), transparent);
+    animation: scanline 4s ease-in-out infinite;
+  }
+
+  @keyframes scanline {
+    0% { left: -100%; }
+    100% { left: 200%; }
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Custom scrollbar for inner scroll containers if ever needed */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 229, 255, 0.3);
+  border-radius: 2px;
+}
+
+/* Focus visible styles */
+:focus-visible {
+  outline: 2px solid #00e5ff;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Selection */
+::selection {
+  background: rgba(0, 229, 255, 0.3);
+  color: #f0f0f5;
+}
