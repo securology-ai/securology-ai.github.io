@@ -256,7 +256,8 @@ function AttackArcs() {
 }
 
 function ArcLine({ arc }: { arc: AttackArc }) {
-  const lineRef = useRef<THREE.Line>(null!)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const lineRef = useRef<any>(null!)
   const headRef = useRef<THREE.Mesh>(null!)
 
   const { curvePoints, curve } = useMemo(() => {
@@ -301,7 +302,8 @@ function ArcLine({ arc }: { arc: AttackArc }) {
 
   return (
     <>
-      <line ref={lineRef}>
+      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+      <line ref={lineRef as any}>
         <bufferGeometry />
         <lineBasicMaterial
           color={arc.color}
