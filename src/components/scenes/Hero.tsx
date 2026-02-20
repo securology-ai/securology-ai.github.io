@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Suspense, lazy } from 'react'
 import Button from '../ui/Button'
-import { ArrowRightIcon, DownloadIcon, ShieldIcon, CloudIcon, AlertIcon } from '../ui/Icons'
+import { ArrowRightIcon, ShieldIcon, CloudIcon, AlertIcon } from '../ui/Icons'
 import type { SceneId } from '../../types'
 
 const AICore = lazy(() => import('../three/AICore'))
@@ -112,17 +112,6 @@ export default function Hero({ onNavigate }: HeroProps) {
               onClick={() => onNavigate('contact')}
             >
               Book a Consultation
-            </Button>
-            <Button
-              variant="secondary"
-              size="lg"
-              icon={<DownloadIcon className="w-4 h-4" />}
-              onClick={() => {
-                /* placeholder PDF link */
-                alert('PDF download placeholder — link your capabilities PDF here.')
-              }}
-            >
-              Download Capabilities
             </Button>
           </motion.div>
         </motion.div>
